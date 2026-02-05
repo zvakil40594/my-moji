@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,10 +55,10 @@
 
     #no {
       background-color: #ccc;
-      position: relative; /* starts next to Yes */
+      position: relative;
     }
 
-    /* ❤️ Floating hearts ❤️ */
+    /* ❤️ Hearts ❤️ */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -76,17 +77,34 @@
         opacity: 0;
       }
     }
+
+    /* 🎉 Confetti 🎉 */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 14px;
+      opacity: 0.9;
+      animation: fall 3.5s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div id="container">
     <div class="dog">
-      <!-- Golden Retriever GIF (Tenor – reliable) -->
       <img src="https://media1.tenor.com/m/AYtp4vEr0IcAAAAd/golden-retriever-dog.gif" alt="Golden Retriever">
     </div>
 
-    <h1>Will you be my moji forever?</h1>
+    <h1>Can I squish you forever?</h1>
 
     <div class="buttons">
       <button id="yes">Yes</button>
@@ -107,12 +125,12 @@
       noButton.style.top = y + "px";
     }
 
-    // Only starts moving once cursor approaches
     noButton.addEventListener("mouseenter", moveNoButton);
 
     yesButton.addEventListener("click", () => {
       container.innerHTML = "<h1>Happy 1 Asshole ❤️</h1>";
       startHearts();
+      startConfetti();
     });
 
     function startHearts() {
@@ -126,6 +144,20 @@
 
         setTimeout(() => heart.remove(), 4000);
       }, 300);
+    }
+
+    function startConfetti() {
+      const colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#4d96ff", "#c77dff"];
+      setInterval(() => {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3500);
+      }, 200);
     }
   </script>
 
