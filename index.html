@@ -28,18 +28,22 @@
     }
 
     .dog img {
-      width: 250px;
+      width: 260px;
       border-radius: 20px;
       margin-bottom: 30px;
     }
 
+    .buttons {
+      position: relative;
+      display: inline-block;
+    }
+
     button {
       font-size: 1.2rem;
-      padding: 12px 24px;
+      padding: 12px 28px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      position: relative;
     }
 
     #yes {
@@ -50,7 +54,7 @@
 
     #no {
       background-color: #ccc;
-      position: absolute;
+      position: relative; /* starts normal */
     }
 
     /* ❤️ Floating hearts ❤️ */
@@ -78,11 +82,16 @@
 
   <div id="container">
     <div class="dog">
-      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Golden Retriever">
+      <!-- Option 3: Golden Retriever Puppy -->
+      <img src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif" alt="Golden Retriever Puppy">
     </div>
+
     <h1>Will you be my moji forever?</h1>
-    <button id="yes">Yes</button>
-    <button id="no">No</button>
+
+    <div class="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
   </div>
 
   <script>
@@ -90,15 +99,22 @@
     const yesButton = document.getElementById("yes");
     const container = document.getElementById("container");
 
+    let noHasMoved = false;
+
     function moveNoButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+      noButton.style.position = "fixed";
       noButton.style.left = x + "px";
       noButton.style.top = y + "px";
     }
 
-    moveNoButton();
-    noButton.addEventListener("mouseover", moveNoButton);
+    noButton.addEventListener("mouseenter", () => {
+      if (!noHasMoved) {
+        noHasMoved = true;
+      }
+      moveNoButton();
+    });
 
     yesButton.addEventListener("click", () => {
       container.innerHTML = "<h1>Happy 1 Asshole ❤️</h1>";
@@ -121,3 +137,4 @@
 
 </body>
 </html>
+
