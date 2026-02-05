@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Question</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffe6ec, #fff7cc);
+    }
+
+    #container {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .dog img {
+      width: 250px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+      margin-right: 20px;
+    }
+
+    #no {
+      background-color: #ccc;
+      position: absolute;
+    }
+
+    /* ❤️ Floating hearts ❤️ */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      animation: floatUp 4s linear forwards;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.8);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <div class="dog">
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Golden Retriever">
+    </div>
+    <h1>Will you be my moji forever?</h1>
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const container = document.getElementById("container");
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    }
+
+    moveNoButton();
+    noButton.addEventListener("mouseover", moveNoButton);
+
+    yesButton.addEventListener("click", () => {
+      container.innerHTML = "<h1>Happy 1 Asshole ❤️</h1>";
+      startHearts();
+    });
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (20 + Math.random() * 30) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
